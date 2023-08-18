@@ -2,6 +2,7 @@ import os
 from dateutil import parser
 from kubernetes import client, config, watch
 import yaml
+import sys
 
 config.load_kube_config()
 
@@ -69,9 +70,10 @@ def get_child_tasks(pipeline):
     return child_tasks 
 
 def main():
-    output_file = "basic_pod_overhead_times.yaml"
+    pipeline_name = sys.argv[1]
+    output_file = f"{pipeline_name}_times.yaml"
     execute_all_tasks()
-    execute_pipeline("pipelines/basic_pod_overhead.yaml")
+    execute_pipeline(f"pipelines/{pipeline_name}.yaml")
     status, pipeline_obj = wait_until_complete()
     if status is True:
         tasks = get_child_tasks(pipeline_obj)
