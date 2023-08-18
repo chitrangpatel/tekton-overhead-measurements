@@ -1,0 +1,14 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: workspace-task
+spec:
+  workspaces:
+    - name: shared
+  steps:        
+    - name: s1
+      image: alpine
+      script: |
+        echo hi
+        ls $(workspaces.shared.path)
+        sleep 1

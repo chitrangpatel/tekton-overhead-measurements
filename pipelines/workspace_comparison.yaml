@@ -1,0 +1,43 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: ten-tasks
+spec:
+  workspaces:
+    - name: empty
+      emptyDir: {}
+    - name: persistent
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
+          storageClassName: standard
+  pipelineSpec:
+    tasks:
+      - name: t1
+        taskRef:
+          name: basic-task
+      - name: t2
+        runAfter: ["t1"]
+        workspaces:
+          - name: shared
+            workspace: empty
+        taskRef:
+          name: workspace-task
+      - name: t3
+        workspaces:
+          - name: shared
+            workspace: persistent
+        runAfter: ["t2"]
+        taskRef:
+          name: workspace-task
+      - name: t4
+        workspaces:
+          - name: shared
+            workspace: persistent
+        runAfter: ["t3"]
+        taskRef:
+          name: workspace-task

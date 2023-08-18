@@ -1,0 +1,11 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: basic-task
+spec:
+  steps:        
+    - name: s1
+      image: alpine
+      script: |
+        echo hi
+        sleep 1

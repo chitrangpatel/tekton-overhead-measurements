@@ -1,0 +1,46 @@
+apiVersion: tekton.dev/v1
+kind: PipelineRun
+metadata:
+  name: ten-tasks
+spec:
+  pipelineSpec:
+    tasks:
+      - name: t1
+        taskRef:
+          name: basic-task
+      - name: t2
+        runAfter: ["t1"]
+        taskRef:
+          name: basic-task
+      - name: t3
+        runAfter: ["t2"]
+        taskRef:
+          name: basic-task
+      - name: t4
+        runAfter: ["t3"]
+        taskRef:
+          name: basic-task
+      - name: t5
+        runAfter: ["t4"]
+        taskRef:
+          name: basic-task
+      - name: t6
+        runAfter: ["t5"]
+        taskRef:
+          name: basic-task
+      - name: t7
+        runAfter: ["t6"]
+        taskRef:
+          name: basic-task
+      - name: t8
+        runAfter: ["t7"]
+        taskRef:
+          name: basic-task
+      - name: t9
+        runAfter: ["t8"]
+        taskRef:
+          name: basic-task
+      - name: t10
+        runAfter: ["t9"]
+        taskRef:
+          name: basic-task
