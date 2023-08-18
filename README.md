@@ -16,6 +16,6 @@ pip install -r requirements.txt
 
 ## Check that everything works
 ```bash
-python3 execute_and_wait_for_completion.py # this should produce a basic_pod_overhead_times.yaml file
-python3 plot_overhead.py # This should produce a basic_pod_overhead_times.png file which you can inspect
+python3 execute_and_wait_for_completion.py basic_pod_overhead # this should produce a basic_pod_overhead_times.yaml file
+python3 plot_overhead.py basic_pod_overhead # This should produce a basic_pod_overhead_times.png file which you can inspect
 ```
